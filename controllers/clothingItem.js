@@ -8,9 +8,9 @@ const {
 } = require("../utils/errors");
 
 const createItem = (req, res) => {
-  const { name, weather, imageURL, likes } = req.body;
+  const { name, weather, imageUrl, likes } = req.body;
   clothingItem
-    .create({ name, weather, imageURL, likes, owner: req.user._id })
+    .create({ name, weather, imageUrl, likes, owner: req.user._id })
     .then((item) => {
       res.send({ data: item });
     })
@@ -41,9 +41,9 @@ const getItems = (req, res) => {
 
 const updateItem = (req, res) => {
   const { itemId } = req.params;
-  const { imageURL } = req.body;
+  const { imageUrl } = req.body;
   clothingItem
-    .findByIdAndUpdate(itemId, { $set: { imageURL } })
+    .findByIdAndUpdate(itemId, { $set: { imageUrl } })
     .orFail()
     .then((item) => res.status(200).send({ data: item }))
     .catch((err) => {
