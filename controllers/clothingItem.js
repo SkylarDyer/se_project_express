@@ -9,9 +9,8 @@ const {
 
 const createItem = (req, res) => {
   const { name, weather, imageURL, likes } = req.body;
-  const { owner } = req.user._id;
   clothingItem
-    .create({ name, weather, imageURL, owner, likes })
+    .create({ name, weather, imageURL, likes, owner: req.user._id })
     .then((item) => {
       res.send({ data: item });
     })
@@ -57,12 +56,11 @@ const updateItem = (req, res) => {
 
 const deleteItem = (req, res) => {
   const { itemId } = req.params;
-  const { owner } = req.user._id;
   clothingItem
     .findByIdAndDelete(itemId)
     .orFail()
     .then((item) => {
-      if (String(item.owner) !== owner) {
+      if (!item.owner.equals(req.user._id)) {
         res
           .status(FORBIDDEN)
           .send({ message: "You are not authorized to delete this item." });

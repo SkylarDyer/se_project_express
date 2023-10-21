@@ -10,16 +10,16 @@ mongoose.connect(
   },
   (e) => console.log("DB error", e),
 );
-
-const routes = require("./routes");
-app.use(express.json());
-app.use(routes);
 app.use((req, res, next) => {
   req.user = {
     _id: "6532fd49c1fb908a3bb91076",
   };
   next();
 });
+
+const routes = require("./routes");
+app.use(express.json());
+app.use(routes);
 
 app.listen(PORT, () => {
   console.log(`App listening on ${PORT}`);
