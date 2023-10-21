@@ -14,7 +14,7 @@ const getUser = (req, res) => {
   user
     .findById(userId)
     .orFail()
-    .then((item) => res.status(200).send(items))
+    .then((item) => res.status(200).send(item))
     .catch((e) => {
       res.status(500).send({ message: "Error from getUser", e });
     });
