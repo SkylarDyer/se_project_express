@@ -10,7 +10,6 @@ module.exports = {
     ecmaVersion: "latest",
   },
   rules: {
-    /*eslint no-underscore-dangle: ["error", { "allow": ["_id"] }]*/
-    "_id": "off"
+    "no-underscore-dangle": ["error", { allow: ["_id"] }],
   },
 };

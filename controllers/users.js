@@ -5,10 +5,10 @@ const getUsers = (req, res) => {
   user
     .find({})
     .then((items) => res.status(200).send(items))
-    .catch((e) => {
+    .catch(() => {
       res
         .status(DEFAULT_ERROR)
-        .send({ message: "An error has occurred on the server.", e });
+        .send({ message: "An error has occurred on the server." });
     });
 };
 
@@ -48,8 +48,12 @@ const createUser = (req, res) => {
       console.error(err);
       if (err.name === "ValidationError") {
         res.status(BAD_REQUEST).send({
-          message: err.message,
+          message: "invalid data",
         });
+      } else {
+        res
+          .status(DEFAULT_ERROR)
+          .send({ message: "An error has occurred on the server." });
       }
     });
 };
