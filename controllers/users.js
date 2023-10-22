@@ -1,8 +1,8 @@
-const user = require("../models/user");
+const User = require("../models/user");
 const { BAD_REQUEST, DEFAULT_ERROR, NOT_FOUND } = require("../utils/errors");
 
 const getUsers = (req, res) => {
-  user
+  User
     .find({})
     .then((items) => res.status(200).send(items))
     .catch(() => {
@@ -14,7 +14,7 @@ const getUsers = (req, res) => {
 
 const getUser = (req, res) => {
   const { userId } = req.params;
-  user
+  User
     .findById(userId)
     .orFail()
     .then((user) => res.send(user))
@@ -39,7 +39,7 @@ const getUser = (req, res) => {
 
 const createUser = (req, res) => {
   const { name, avatar } = req.body;
-  user
+  User
     .create({ name, avatar })
     .then((item) => {
       res.status(201).send({ data: item });
