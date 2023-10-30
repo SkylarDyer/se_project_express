@@ -38,22 +38,6 @@ const getItems = (req, res) => {
         .send({ message: "An error has occurred on the server." });
     });
 };
-
-// const updateItem = (req, res) => {
-//   const { itemId } = req.params;
-//   const { imageUrl } = req.body;
-//   clothingItem
-//     .findByIdAndUpdate(itemId, { $set: { imageUrl } })
-//     .orFail()
-//     .then((item) => res.status(200).send({ data: item }))
-//     .catch((err) => {
-//       console.error(err);
-//       res
-//         .status(DEFAULT_ERROR)
-//         .send({ message: "An error has occurred on the server." });
-//     });
-// };
-
 const deleteItem = (req, res) => {
   const { itemId } = req.params;
   clothingItem
