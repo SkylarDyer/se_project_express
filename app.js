@@ -11,12 +11,6 @@ mongoose.connect(
   },
   (e) => console.log("DB error", e),
 );
-app.use((req, res, next) => {
-  req.user = {
-    _id: "6532fd49c1fb908a3bb91076",
-  };
-  next();
-});
 
 const routes = require("./routes");
 
