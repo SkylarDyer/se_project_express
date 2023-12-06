@@ -131,7 +131,7 @@ const updateUser = (req, res) => {
     });
 };
 
-const login = (req, res) => {
+const loginUser = (req, res) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
@@ -159,7 +159,7 @@ module.exports = {
   getUser,
   getUsers,
   createUser,
-  login,
+  loginUser,
   getCurrentUser,
   updateUser,
 };
