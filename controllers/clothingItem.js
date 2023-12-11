@@ -1,5 +1,6 @@
 const clothingItem = require("../models/clothingItem");
 // const ClothingItem = require("../models/clothingItem");
+
 const {
   BAD_REQUEST,
   DEFAULT_ERROR,
@@ -114,7 +115,7 @@ const dislikeItem = (req, res) =>
           message:
             "There is no clothing item with the requested ID, or the request was sent to a non-existent address.",
         });
-      } else if (err.name === "CastError") {
+      } else if (err.name === "CastError" || err.name === "ValidationError") {
         res.status(BAD_REQUEST).send({
           message: "Invalid ID passed.",
         });
