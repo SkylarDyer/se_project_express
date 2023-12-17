@@ -10,9 +10,7 @@ const {
   DEFAULT_ERROR,
   NOT_FOUND,
   DUPLICATE,
-  SUCCESS,
-  // UNAUTHORIZED,
-  // UNAUTHORIZED,
+  UNAUTHORIZED,
 } = require("../utils/errors");
 
 const getCurrentUser = async (req, res) => {
@@ -24,7 +22,7 @@ const getCurrentUser = async (req, res) => {
       return res.status(NOT_FOUND).send({ message: "User not found" });
     }
 
-    return res.status(SUCCESS).send({ data: user });
+    return res.send({ data: user });
   } catch (error) {
     console.error(error);
     return res
@@ -109,7 +107,12 @@ const loginUser = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(BAD_REQUEST).send({ message: "unauthorized login" });
+      if (err.message === "Incorrect email or password") {
+        res.status(UNAUTHORIZED).send({ message: "Unauthorized login" });
+      }
+      res
+        .status(DEFAULT_ERROR)
+        .send({ message: "An error has occured on the server" });
     });
 };
 

@@ -22,7 +22,6 @@ const user = new mongoose.Schema({
     type: String,
     required: true,
     select: false,
-    minLength: 8,
   },
   avatar: {
     type: String,
